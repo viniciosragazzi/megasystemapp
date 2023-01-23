@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  font-size: 62.5%;
+}
+body {
+  font-family: "Nunito Sans", sans-serif;
+
+}
+
+option {
+  background: #16171a !important;
+  cursor: pointer;
+}
+
+tbody tr:nth-child(odd), .mobileItens .item:nth-child(odd) {
+  background-color: rgb(27 27 45) !important;
+  color: #fff;
+}
