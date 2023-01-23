@@ -103,7 +103,7 @@ export function Table() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden mobileItens">
           {datasFiltered.map((data) => (
-            <div className="bg-dark-grey item space-y-3 p-4 rounded-lg shadow min-w-[340px]">
+            <div className="bg-dark-grey item space-y-3 p-4 rounded-lg shadow min-w-[320px]">
               <div className="flex items-center space-x-2 text-lg gap-3 relative">
                 <div>
                   <a
