@@ -146,17 +146,21 @@ export function Table() {
                     #{data.id}
                   </a>
                 </div>
-                <div className="text-gray-500">10/10/2021</div>
+                <div className="text-gray-500">{data.data}</div>
                 <div>
                   <span className="p-1.5 text-xs font-medium uppercase tracking-wider text-white-800 bg-green-200 rounded-lg bg-opacity-50">
                     {data.status}
                   </span>
                 </div>
                 <div className="flex text-2xl gap-2 absolute right-0 text-dark-purple">
-                  <span className=" cursor-pointer hover:scale-90 transition-transform">
+                  <span   onClick={() => {
+                          clickEditBtn(data.id);
+                        }} className=" cursor-pointer hover:scale-90 transition-transform">
                     <Pencil />
                   </span>
-                  <span className=" cursor-pointer hover:scale-90 transition-transform">
+                  <span   onClick={() => {
+                          clickExcluirBtn(data.id);
+                        }} className=" cursor-pointer hover:scale-90 transition-transform">
                     <Trash />
                   </span>
                 </div>
