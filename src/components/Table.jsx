@@ -1,7 +1,7 @@
 import { Pencil, Spinner, Trash } from "phosphor-react";
 import { useContext, useState } from "react";
 import { DadosContext } from "../context/ContextApp";
-
+import { Pagination } from "./Pagination";
 export function Table() {
   const {
     datasFiltered,
@@ -12,9 +12,14 @@ export function Table() {
     setModalOpen,
     setModalType,
     modalType,
+    quantityDataByPage,
     btnExcluirClick,
     loading,
+    offset,
+    setOffset,
   } = useContext(DadosContext);
+  const LIMIT = quantityDataByPage;
+
   const clickEditBtn = (id) => {
     setIdItem(id);
     setModalType("edit");
@@ -25,10 +30,24 @@ export function Table() {
   };
 
   return (
-    <div className={`tableArea w-full  flex  ${scrolled ? "mt-[100px]" : ""}`}>
-      <div className="p-5 w-full h-screen relative">
-        <h1 className="text-2xl font-bold mb-2">Cliente Cadastrados</h1>
+    <div
+      className={`tableArea w-full  flex flex-col  ${
+        scrolled ? "mt-[100px]" : ""
+      }`}
+    >
+      <div className="p-5 w-full  relative">
+        <div className="flex w-full justify-center items-center  my-5">
+          <h1 className="text-2xl font-bold mb-2 flex-1">
+            Cliente Cadastrados
+          </h1>
 
+          <Pagination
+            limit={LIMIT}
+            total={24}
+            offset={offset}
+            setOffset={setOffset}
+          />
+        </div>
         <div className="overflow-auto rounded-lg shadow w-full  hidden md:block">
           <table className="w-full ">
             <thead className="bg-dark-grey">
@@ -65,69 +84,68 @@ export function Table() {
                 </th>
               </tr>
             </thead>
-            
-              <tbody className="divide-y divide-gray-800">
-                {datasFiltered.map((data) => (
-                  <tr key={data.id} className="bg-dark-grey ">
-                    <td className="p-3 text-lg text-snow-white whitespace-nowrap">
-                      <a
-                        href="#"
-                        className="font-bold text-dark-purple hover:underline"
-                      >
-                        {data.id}
-                      </a>
-                    </td>
-                    <td className="p-3 text-lg font-bold text-snow-white whitespace-nowrap">
-                      {data.nome}
-                    </td>
-                    <td className="p-3 text-lg text-snow-white whitespace-nowrap">
-                      {data.contato}
-                    </td>
-                    <td className="p-3 text-lg text-snow-white whitespace-nowrap">
-                      {data.equipamento}
-                    </td>
-                    <td className="p-3 text-lg text-snow-white whitespace-nowrap">
-                      {data.marca}
-                    </td>
-                    <td className="p-3 text-lg text-snow-white whitespace-nowrap">
-                      {data.modelo}
-                    </td>
 
-                    <td className="p-3 text-lg text-snow-white whitespace-nowrap">
-                      {data.valor}
-                    </td>
+            <tbody className="divide-y divide-gray-800">
+              {datasFiltered.map((data) => (
+                <tr key={data.id} className="bg-dark-grey ">
+                  <td className="p-3 text-lg text-snow-white whitespace-nowrap">
+                    <a
+                      href="#"
+                      className="font-bold text-dark-purple hover:underline"
+                    >
+                      {data.id}
+                    </a>
+                  </td>
+                  <td className="p-3 text-lg font-bold text-snow-white whitespace-nowrap">
+                    {data.nome}
+                  </td>
+                  <td className="p-3 text-lg text-snow-white whitespace-nowrap">
+                    {data.contato}
+                  </td>
+                  <td className="p-3 text-lg text-snow-white whitespace-nowrap">
+                    {data.equipamento}
+                  </td>
+                  <td className="p-3 text-lg text-snow-white whitespace-nowrap">
+                    {data.marca}
+                  </td>
+                  <td className="p-3 text-lg text-snow-white whitespace-nowrap">
+                    {data.modelo}
+                  </td>
 
-                    <td className="p-3 text-lg text-snow-white whitespace-nowrap">
-                      {data.data}
-                    </td>
+                  <td className="p-3 text-lg text-snow-white whitespace-nowrap">
+                    {data.valor}
+                  </td>
 
-                    <td className="p-3 text-lg  text-snow-white whitespace-nowrap ">
-                      <span className=" px-3 py-2  w-full flex items-center justify-center font-bold text-xs uppercase tracking-wider  bg-green-200 rounded-lg bg-opacity-50">
-                        {data.status}
-                      </span>
-                    </td>
-                    <td className="p-3 text-3xl flex  whitespace-nowrap text-primary-purple">
-                      <span
-                        className=" cursor-pointer hover:scale-90 transition-transform"
-                        onClick={() => {
-                          clickEditBtn(data.id);
-                        }}
-                      >
-                        <Pencil />
-                      </span>
-                      <span
-                        onClick={() => {
-                          clickExcluirBtn(data.id);
-                        }}
-                        className=" cursor-pointer hover:scale-90 transition-transform"
-                      >
-                        <Trash />
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            
+                  <td className="p-3 text-lg text-snow-white whitespace-nowrap">
+                    {data.data}
+                  </td>
+
+                  <td className="p-3 text-lg  text-snow-white whitespace-nowrap ">
+                    <span className=" px-3 py-2  w-full flex items-center justify-center font-bold text-xs uppercase tracking-wider  bg-green-200 rounded-lg bg-opacity-50">
+                      {data.status}
+                    </span>
+                  </td>
+                  <td className="p-3 text-3xl flex  whitespace-nowrap text-primary-purple">
+                    <span
+                      className=" cursor-pointer hover:scale-90 transition-transform"
+                      onClick={() => {
+                        clickEditBtn(data.id);
+                      }}
+                    >
+                      <Pencil />
+                    </span>
+                    <span
+                      onClick={() => {
+                        clickExcluirBtn(data.id);
+                      }}
+                      className=" cursor-pointer hover:scale-90 transition-transform"
+                    >
+                      <Trash />
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
 
@@ -153,14 +171,20 @@ export function Table() {
                   </span>
                 </div>
                 <div className="flex text-2xl gap-2 absolute right-0 text-dark-purple">
-                  <span   onClick={() => {
-                          clickEditBtn(data.id);
-                        }} className=" cursor-pointer hover:scale-90 transition-transform">
+                  <span
+                    onClick={() => {
+                      clickEditBtn(data.id);
+                    }}
+                    className=" cursor-pointer hover:scale-90 transition-transform"
+                  >
                     <Pencil />
                   </span>
-                  <span   onClick={() => {
-                          clickExcluirBtn(data.id);
-                        }} className=" cursor-pointer hover:scale-90 transition-transform">
+                  <span
+                    onClick={() => {
+                      clickExcluirBtn(data.id);
+                    }}
+                    className=" cursor-pointer hover:scale-90 transition-transform"
+                  >
                     <Trash />
                   </span>
                 </div>
