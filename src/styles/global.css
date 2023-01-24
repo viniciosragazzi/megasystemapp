@@ -7,15 +7,50 @@ html {
 }
 body {
   font-family: "Nunito Sans", sans-serif;
-
 }
 
+select#status option {
+  background: transparent !important;
+  cursor: pointer;
+  font-weight:bold;
+}
 option {
   background: #16171a !important;
   cursor: pointer;
 }
 
-tbody tr:nth-child(odd), .mobileItens .item:nth-child(odd) {
+tbody tr:nth-child(odd),
+.mobileItens .item:nth-child(odd) {
   background-color: rgb(27 27 45) !important;
   color: #fff;
+}
+
+.modal-container {
+  background: rgb(255 255 255 / 3%);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: brightness(0.5);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary) var(--primary);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #6262d9;
+
+  border-radius: 14px;
+  border: 3px solid var(--primary);
 }
